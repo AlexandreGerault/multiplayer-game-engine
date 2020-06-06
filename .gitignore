@@ -33,3 +33,4 @@
 
 # Build repositories
 cmake-build-debug/
+/libs
