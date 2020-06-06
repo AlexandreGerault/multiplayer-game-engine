@@ -1,7 +1,7 @@
 #ifndef WEREWOLF_TEXT_ROOM_HPP
 #define WEREWOLF_TEXT_ROOM_HPP
 
-#include <rooms/room_interface.hpp>
+#include "rooms/room_interface.hpp"
 
 namespace ww {
     class text_room : public room_interface {

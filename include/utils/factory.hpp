@@ -3,7 +3,6 @@
 
 #include <functional>
 #include <memory>
-#include <rooms/room_interface.hpp>
 #include <string>
 #include <unordered_map>
 

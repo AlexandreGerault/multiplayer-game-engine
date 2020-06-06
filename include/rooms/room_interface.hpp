@@ -1,8 +1,8 @@
 #ifndef WEREWOLF_ROOM_INTERFACE_HPP
 #define WEREWOLF_ROOM_INTERFACE_HPP
 
-#include <core/configuration.hpp>
 #include <string>
+#include "core/configuration.hpp"
 
 namespace ww {
     enum class room_state {
