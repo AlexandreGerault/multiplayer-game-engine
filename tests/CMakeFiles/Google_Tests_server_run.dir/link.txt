@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/Google_Tests_server_run.dir/ConfigurationTests.cpp.o  -o Google_Tests_server_run  ../../libserver_lib.a ../../lib/libgtest.a ../../lib/libgtest_main.a ../../lib/libgtest.a -lpthread 

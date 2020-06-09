@@ -34,3 +34,6 @@
 # Build repositories
 cmake-build-debug/
 /libs
+.idea
+.vs
+out

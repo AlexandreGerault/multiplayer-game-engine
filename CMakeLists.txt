@@ -5,7 +5,7 @@ project(WerewolfServer VERSION 0.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(Boost 1.73.0 PATHS libs)
+find_package(Boost 1.73.0 COMPONENTS thread system REQUIRED)
 
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
@@ -19,12 +19,13 @@ if(Boost_FOUND)
             src/rooms/server_rooms.cpp
             src/network/tcp_server.cpp
             src/network/tcp_connection.cpp
-            )
+            src/core/application.cpp)
 
     add_library(server_lib ${SERVER_SOURCE_FILES})
     target_include_directories(server_lib PUBLIC include)
     add_executable(server main.cpp)
     target_link_libraries(server ${Boost_LIBRARIES})
+    target_link_directories(server PUBLIC ${Boost_INCLUDE_DIRS})
     target_link_libraries(server server_lib)
 endif()
 
