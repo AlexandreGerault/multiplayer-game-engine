@@ -1,9 +1,8 @@
 #ifndef WEREWOLFSERVER_TCP_SERVER_HPP
 #define WEREWOLFSERVER_TCP_SERVER_HPP
 
-#include <boost/asio/io_context.hpp>
-#include <boost/asio/ip/tcp.hpp>
-#include <boost/system/error_code.hpp>
+#include <boost/asio.hpp>
+#include <boost/bind.hpp>
 #include <unordered_set>
 #include <memory>
 #include "network/tcp_connection.hpp"

@@ -5,14 +5,13 @@
 #include <set>
 #include <string>
 #include "core/configuration.hpp"
+#include "network/tcp_connection.hpp"
 
 namespace ww {
     enum class room_state {
         lobby,
         in_progress
     };
-
-    class tcp_connection;
 
     class room_interface {
 
