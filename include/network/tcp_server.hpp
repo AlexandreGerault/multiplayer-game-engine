@@ -12,6 +12,7 @@ namespace ww {
     public:
         tcp_server() = delete;
         tcp_server(boost::asio::io_context &io_context, boost::asio::ip::tcp::endpoint const &enpoint);
+        void run();
 
     private:
         boost::asio::io_context& m_io_context;
