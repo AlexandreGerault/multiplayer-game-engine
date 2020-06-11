@@ -5,11 +5,11 @@ using namespace ww;
 
 tcp_server::tcp_server(boost::asio::io_context& io_context, boost::asio::ip::tcp::endpoint const& endpoint) 
 	: m_io_context(io_context), m_acceptor(io_context, endpoint) {
-    std::cout << "Serveur créé" << std::endl;
+    std::cout << "Serveur crÃ©Ã©" << std::endl;
 }
 
 void tcp_server::run() {
-    std::cout << "Début d'écoute des connexions" << std::endl;
+    std::cout << "DÃ©but d'Ã©coute des connexions" << std::endl;
     start_accept();
 
     std::cout << "io_context::run();" << std::endl;
@@ -28,8 +28,9 @@ void tcp_server::start_accept() {
 
 void tcp_server::handle_accept(std::shared_ptr<tcp_connection> new_connection, const boost::system::error_code &error) {
     if (!error) {
-        std::cout << "Nouvelle connexion acceptée." << std::endl;
+        std::cout << "Nouvelle connexion acceptÃ©e." << std::endl;
         m_clients.insert(new_connection);
+        new_connection->start();
         start_accept();
     }
 }
