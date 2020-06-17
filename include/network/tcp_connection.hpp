@@ -6,24 +6,48 @@
 #include <boost/bind.hpp>
 #include <string>
 #include <iostream>
+#include <sstream>
+#include <array>
+#include <cstdint>
 
 namespace ww {
+    /**
+     * @brief Send and receive data using TCP.
+     * Each packet follows the following format: [HEADER (2 BYTES)][CONTENT {String} (SIZE CODED IN HEADER)].
+     */
     class tcp_connection : public std::enable_shared_from_this<tcp_connection> {
     public:
         tcp_connection() = delete;
+
         tcp_connection(boost::asio::io_context &context);
 
         void start();
 
-        void write(std::string message);
+        void stop();
+
+        void write(std::string const &message);
 
         boost::asio::ip::tcp::socket &socket();
 
     private:
-        boost::asio::ip::tcp::socket m_socket;
-        void handle_read();
+        // Read part is split into two processes:
+        // 1. We read the header that contains the size of the incoming packet.
+        //    It is coded on 2 Bytes
+        // 2. We then read the amount of Bytes announced by the header
+        void read_header();
+
+        void handle_read_header(const boost::system::error_code &ec, std::size_t bytes_transferred);
+
+        void read_body();
+
+        void handle_read_body(const boost::system::error_code &ec, std::size_t bytes_transferred);
+
         void handle_write();
-        std::string m_data;
+
+        boost::asio::ip::tcp::socket m_socket;
+        std::array<char, 2> m_header_buffer;
+        std::vector<char> m_body_buffer;
+        uint16_t m_packet_size;
     };
 }
 

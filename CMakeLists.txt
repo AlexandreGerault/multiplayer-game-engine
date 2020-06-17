@@ -5,7 +5,7 @@ project(WerewolfServer VERSION 0.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(Boost 1.73.0 COMPONENTS thread system REQUIRED)
+find_package(Boost 1.73.0 COMPONENTS thread system REQUIRED PATHS libs)
 
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
