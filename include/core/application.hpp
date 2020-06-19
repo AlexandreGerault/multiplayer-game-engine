@@ -1,9 +1,9 @@
 #ifndef WEREWOLF_APPLICATION_HPP
 #define WEREWOLF_APPLICATION_HPP
 
-#include <iostream>
 #include <boost/asio/io_context.hpp>
 #include <string>
+#include <spdlog/spdlog.h>
 #include "core/configuration.hpp"
 #include "network/tcp_server.hpp"
 #include "rooms/server_rooms.hpp"

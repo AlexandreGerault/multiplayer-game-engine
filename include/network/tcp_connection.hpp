@@ -9,6 +9,7 @@
 #include <sstream>
 #include <array>
 #include <cstdint>
+#include <spdlog/spdlog.h>
 
 #include "network/packet.hpp"
 

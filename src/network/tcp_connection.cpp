@@ -33,18 +33,17 @@ void tcp_connection::read_header() {
  * @param bytes_transferred
  */
 void tcp_connection::handle_read_header(const boost::system::error_code &error, std::size_t bytes_transferred) {
-    std::cout << "En-tête reçu" << std::endl;
+    spdlog::debug("Packet header received");
     header_size_type size = *reinterpret_cast<header_size_type *>(m_header_buffer.data());
     if (!error) {
         m_packet_size = size;
-        std::cout << "Packet size: " << m_packet_size << std::endl;
+        spdlog::debug("Packet size: {}", m_packet_size);
         m_header_buffer.fill(char{});
         m_body_buffer.clear();
         m_body_buffer.resize(m_packet_size);
         read_body();
     } else {
-        std::cout << "Erreurs rencontrées pendant le traitement de l'en-tête" << std::endl;
-        std::cout << error.message() << std::endl;
+        spdlog::error("Error processing header: {}", error.message());
         stop();
     }
 }
@@ -69,16 +68,14 @@ void tcp_connection::read_body() {
  * @param bytes_transferred
  */
 void tcp_connection::handle_read_body(const boost::system::error_code &error, std::size_t bytes_transferred) {
-    std::cout << "Corps de paquet reçu" << std::endl;
+    spdlog::debug("Packet body received");
     if (!error) {
-        std::cout << "Pas d'erreur" << std::endl;
         std::string message{m_body_buffer.begin(), m_body_buffer.end()};
-        std::cout << message << std::endl;
+        spdlog::debug("Packet body: {}", message);
         // notify(CONNECTION_EVENTS::DATA_RECEIVED, message);
         read_header();
     } else {
-        std::cout << "Erreurs rencontrées pendant le traitement du corps du paquet" << std::endl;
-        std::cout << error.message() << std::endl;
+        spdlog::error("Error processing packet body: {}", error.message());
         stop();
     }
 }
@@ -108,7 +105,7 @@ void tcp_connection::write(packet const& p) {
  * @brief Display a success message.
  */
 void tcp_connection::handle_write() {
-    std::cout << "Message envoyé" << std::endl;
+    spdlog::debug("Write method handler");
 }
 
 /**

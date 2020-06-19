@@ -8,10 +8,11 @@ application::application(boost::asio::io_context &context, boost::asio::ip::tcp:
         context,
         endpoint
     ) {
-    std::cout << "Création de l'application" << std::endl;
+
+    spdlog::debug("Application created");
     try {
         m_server.run();
     } catch (boost::system::system_error &ec) {
-        std::cout << "Error: " << ec.what() << "\n";
+        spdlog::error("Cannot create application: {}", ec.what());
     }
 }

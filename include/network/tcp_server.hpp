@@ -5,6 +5,8 @@
 #include <boost/bind.hpp>
 #include <unordered_set>
 #include <memory>
+#include <spdlog/spdlog.h>
+
 #include "network/tcp_connection.hpp"
 
 namespace ww {

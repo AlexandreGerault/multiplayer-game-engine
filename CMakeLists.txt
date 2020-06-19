@@ -14,6 +14,11 @@ if (UNIX)
     find_package(Boost 1.73.0 COMPONENTS thread system REQUIRED PATHS libs/boost_1_73_0_arch_linux)
 endif(UNIX)
 
+if(NOT TARGET spdlog)
+    # Stand-alone build
+    find_package(spdlog REQUIRED)
+endif()
+
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 
@@ -33,6 +38,7 @@ if(Boost_FOUND)
     target_include_directories(server_lib PUBLIC include)
     add_executable(server main.cpp)
     target_link_libraries(server ${Boost_LIBRARIES})
+    target_link_libraries(server spdlog)
     target_link_directories(server PUBLIC ${Boost_INCLUDE_DIRS})
     target_link_libraries(server server_lib)
 endif()
