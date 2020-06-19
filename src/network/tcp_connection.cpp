@@ -20,9 +20,9 @@ void tcp_connection::read_header() {
     boost::asio::async_read(
             m_socket,
             boost::asio::buffer(m_header_buffer),
-            boost::asio::transfer_exactly(2),
-            [this](const boost::system::error_code &ec, std::size_t bytes_transferred) {
-                handle_read_header(ec, bytes_transferred);
+            boost::asio::transfer_exactly(header_size),
+            [self = shared_from_this()](const boost::system::error_code &ec, std::size_t bytes_transferred) {
+                self->handle_read_header(ec, bytes_transferred);
             }
     );
 }
@@ -34,7 +34,7 @@ void tcp_connection::read_header() {
  */
 void tcp_connection::handle_read_header(const boost::system::error_code &error, std::size_t bytes_transferred) {
     std::cout << "En-tête reçu" << std::endl;
-    uint16_t size = *reinterpret_cast<uint16_t *>(m_header_buffer.data());
+    header_size_type size = *reinterpret_cast<header_size_type *>(m_header_buffer.data());
     if (!error) {
         m_packet_size = size;
         std::cout << "Packet size: " << m_packet_size << std::endl;
@@ -44,7 +44,7 @@ void tcp_connection::handle_read_header(const boost::system::error_code &error, 
         read_body();
     } else {
         std::cout << "Erreurs rencontrées pendant le traitement de l'en-tête" << std::endl;
-        std::cout << error.message() << "\n";
+        std::cout << error.message() << std::endl;
         stop();
     }
 }
@@ -57,8 +57,8 @@ void tcp_connection::read_body() {
             m_socket,
             boost::asio::buffer(m_body_buffer),
             boost::asio::transfer_exactly(m_packet_size),
-            [this](const boost::system::error_code &ec, std::size_t bytes_transferred) {
-                handle_read_body(ec, bytes_transferred);
+            [self = shared_from_this()](const boost::system::error_code &ec, std::size_t bytes_transferred) {
+                self->handle_read_body(ec, bytes_transferred);
             }
     );
 }
@@ -71,13 +71,14 @@ void tcp_connection::read_body() {
 void tcp_connection::handle_read_body(const boost::system::error_code &error, std::size_t bytes_transferred) {
     std::cout << "Corps de paquet reçu" << std::endl;
     if (!error) {
-        std::cout << "Pas d'erreur" << "\n";
+        std::cout << "Pas d'erreur" << std::endl;
         std::string message{m_body_buffer.begin(), m_body_buffer.end()};
-        std::cout << message << "\n";
+        std::cout << message << std::endl;
+        // notify(CONNECTION_EVENTS::DATA_RECEIVED, message);
         read_header();
     } else {
         std::cout << "Erreurs rencontrées pendant le traitement du corps du paquet" << std::endl;
-        std::cout << error.message() << "\n";
+        std::cout << error.message() << std::endl;
         stop();
     }
 }
@@ -87,19 +88,18 @@ void tcp_connection::handle_read_body(const boost::system::error_code &error, st
  * @param message
  */
 void tcp_connection::write(std::string const &message) {
-    uint16_t payload_size = message.length();
-    auto cursor = reinterpret_cast<char *>(&payload_size);
+    packet my_packet{message};
 
-    std::vector<char> payload{};
-    payload.reserve(payload_size + 2);
-    std::copy(cursor, cursor + sizeof(uint16_t), std::back_inserter(payload));
-    std::copy(message.begin(), message.end(), std::back_inserter(payload));
+    write(my_packet);
+}
 
+void tcp_connection::write(packet const& p) {
+    auto payload {p.payload()};
     boost::asio::async_write(
             m_socket,
             boost::asio::buffer(payload),
-            [this, payload = std::move(payload)](const boost::system::error_code &ec, std::size_t bytes_transferred) {
-                handle_write();
+            [self = shared_from_this(), payload = std::move(payload)](const boost::system::error_code &ec, std::size_t bytes_transferred) {
+                self->handle_write();
             }
     );
 }
@@ -115,5 +115,5 @@ void tcp_connection::handle_write() {
  * @brief Free allocated memory.
  */
 void tcp_connection::stop() {
-
+    // notify(CONNECTION_EVENTS::END);
 }

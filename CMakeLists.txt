@@ -1,11 +1,18 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16.5)
 
 project(WerewolfServer VERSION 0.0)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(Boost 1.73.0 COMPONENTS thread system REQUIRED PATHS libs)
+if (WIN32)
+    message(STATUS "Windows Platform")
+    find_package(Boost 1.73.0 COMPONENTS thread system REQUIRED PATHS libs/boost_1_73_0_windows)
+endif(WIN32)
+if (UNIX)
+    message(STATUS "Unix Platform")
+    find_package(Boost 1.73.0 COMPONENTS thread system REQUIRED PATHS libs/boost_1_73_0_arch_linux)
+endif(UNIX)
 
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
@@ -19,7 +26,8 @@ if(Boost_FOUND)
             src/rooms/server_rooms.cpp
             src/network/tcp_server.cpp
             src/network/tcp_connection.cpp
-            src/core/application.cpp)
+            src/core/application.cpp src/network/packet.cpp
+            )
 
     add_library(server_lib ${SERVER_SOURCE_FILES})
     target_include_directories(server_lib PUBLIC include)

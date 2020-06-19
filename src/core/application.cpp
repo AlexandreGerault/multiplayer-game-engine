@@ -9,5 +9,9 @@ application::application(boost::asio::io_context &context, boost::asio::ip::tcp:
         endpoint
     ) {
     std::cout << "Création de l'application" << std::endl;
-    m_server.run();
+    try {
+        m_server.run();
+    } catch (boost::system::system_error &ec) {
+        std::cout << "Error: " << ec.what() << "\n";
+    }
 }

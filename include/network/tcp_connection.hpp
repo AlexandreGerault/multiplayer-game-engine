@@ -10,10 +10,12 @@
 #include <array>
 #include <cstdint>
 
+#include "network/packet.hpp"
+
 namespace ww {
     /**
      * @brief Send and receive data using TCP.
-     * Each packet follows the following format: [HEADER (2 BYTES)][CONTENT {String} (SIZE CODED IN HEADER)].
+     * Each packet follows the following format: {[HEADER (2 BYTES)][CONTENT {String} (SIZE CODED IN HEADER)].}
      */
     class tcp_connection : public std::enable_shared_from_this<tcp_connection> {
     public:
@@ -44,10 +46,12 @@ namespace ww {
 
         void handle_write();
 
+        void write(packet const &p);
+
         boost::asio::ip::tcp::socket m_socket;
-        std::array<char, 2> m_header_buffer;
         std::vector<char> m_body_buffer;
-        uint16_t m_packet_size;
+        std::array<char, header_size> m_header_buffer;
+        header_size_type m_packet_size;
     };
 }
 
