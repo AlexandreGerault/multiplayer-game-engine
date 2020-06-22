@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
+#include <spdlog/spdlog.h>
 
 template<typename T>
 struct expected {

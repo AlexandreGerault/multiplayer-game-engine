@@ -3,9 +3,16 @@
 using namespace ww;
 
 configuration::configuration() : m_file("default.config") {
+    load();
 }
 
-configuration::configuration(std::string path) : m_file(std::move(path)) {}
+configuration::configuration(std::string path) : m_file(std::move(path)) {
+    if (load()) {
+        spdlog::debug("Configuration loaded successfully!");
+    } else {
+        spdlog::error("Cannot load configuration {}", m_file);
+    }
+}
 
 /**
  * Check whether the options map contains a key or not
@@ -63,14 +70,18 @@ bool configuration::load() {
     m_fields.clear();
     std::ifstream loadingFile(m_file);
 
+    spdlog::debug("Load configuration...");
+
     if (loadingFile.is_open()) {
         std::string line;
         std::string delimiter{"="};
         while (std::getline(loadingFile, line)) {
+            spdlog::debug("Loading a value");
             if (auto pos = line.find(delimiter); pos != std::string::npos) {
                 std::string key{line.substr(0, pos)};
                 std::string value{line.substr(pos + 1, line.length())};
                 m_fields.insert({key, value});
+                spdlog::debug("Key: {} | Value: {}", key, value);
             }
         }
         return true;

@@ -15,7 +15,6 @@ if (UNIX)
 endif(UNIX)
 
 if(NOT TARGET spdlog)
-    # Stand-alone build
     find_package(spdlog REQUIRED)
 endif()
 
@@ -29,10 +28,12 @@ if(Boost_FOUND)
             src/rooms/text_room.cpp
             src/rooms/voice_room.cpp
             src/rooms/server_rooms.cpp
-            src/network/tcp_server.cpp
-            src/network/tcp_connection.cpp
-            src/core/application.cpp src/network/packet.cpp
-            )
+            src/network/tcp_listener.cpp
+            src/network/tcp_session.cpp
+            src/core/application.cpp
+            src/network/packet.cpp
+            src/network/tcp_listener_ws.cpp
+            include/network/tcp_session_interface.hpp src/network/tcp_listener_interface.cpp src/network/tcp_session_ws.cpp include/network/tcp_session_ws.hpp src/network/tcp_session_http.cpp include/network/tcp_session_http.hpp)
 
     add_library(server_lib ${SERVER_SOURCE_FILES})
     target_include_directories(server_lib PUBLIC include)

@@ -1,5 +1,5 @@
-#ifndef WEREWOLFSERVER_TCP_CONNECTION_HPP
-#define WEREWOLFSERVER_TCP_CONNECTION_HPP
+#ifndef WEREWOLFSERVER_TCP_SESSION_HPP
+#define WEREWOLFSERVER_TCP_SESSION_HPP
 
 #include <memory>
 #include <boost/asio.hpp>
@@ -11,6 +11,7 @@
 #include <cstdint>
 #include <spdlog/spdlog.h>
 
+#include "network/tcp_session_interface.hpp"
 #include "network/packet.hpp"
 
 namespace ww {
@@ -18,11 +19,11 @@ namespace ww {
      * @brief Send and receive data using TCP.
      * Each packet follows the following format: {[HEADER (2 BYTES)][CONTENT {String} (SIZE CODED IN HEADER)].}
      */
-    class tcp_connection : public std::enable_shared_from_this<tcp_connection> {
+    class tcp_session : public tcp_session_interface {
     public:
-        tcp_connection() = delete;
+        tcp_session() = delete;
 
-        tcp_connection(boost::asio::io_context &context);
+        tcp_session(boost::asio::io_context &context);
 
         void start();
 
@@ -57,4 +58,4 @@ namespace ww {
 }
 
 
-#endif //WEREWOLFSERVER_TCP_CONNECTION_HPP
+#endif //WEREWOLFSERVER_TCP_SESSION_HPP
