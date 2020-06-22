@@ -3,7 +3,8 @@
 
 using namespace ww;
 
-tcp_listener::tcp_listener(io_context &context, endpoint const &ep) : tcp_listener_interface{context, ep} {
+tcp_listener::tcp_listener(boost::asio::io_context &context, boost::asio::ip::tcp::endpoint const &ep)
+        : tcp_listener_interface{context, ep} {
     spdlog::debug("TCP server created");
 }
 

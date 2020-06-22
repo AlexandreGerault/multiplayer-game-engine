@@ -2,7 +2,6 @@
 #define WEREWOLFSERVER_TCP_LISTENER_HPP
 
 #include <boost/asio.hpp>
-#include <boost/bind.hpp>
 #include <spdlog/spdlog.h>
 
 #include "network/tcp_listener_interface.hpp"
@@ -13,7 +12,7 @@ namespace ww {
     public:
         tcp_listener() = delete;
 
-        tcp_listener(io_context &context, endpoint const &ep);
+        tcp_listener(boost::asio::io_context &context, boost::asio::ip::tcp::endpoint const &ep);
 
         void run() override;
 
