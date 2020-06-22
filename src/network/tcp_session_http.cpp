@@ -1,11 +1,12 @@
 #include "network/tcp_session_http.hpp"
+#include "network/tcp_listener_ws.hpp"
 
 using namespace ww;
 
-tcp_session_http::tcp_session_http(boost::asio::ip::tcp::socket sock) {}
+tcp_session_http::tcp_session_http(boost::asio::ip::tcp::socket sock, tcp_listener_ws const &l) : m_socket{std::move(sock)}, m_listener {l} {}
 
 void tcp_session_http::start() {
-    http::async_read(
+    boost::beast::http::async_read(
             m_socket,
             m_buffer,
             m_request,
@@ -14,7 +15,7 @@ void tcp_session_http::start() {
             });
 }
 
-void tcp_session_http::read_handle(boost::system::error_code const &error, std::size_t) {
+void tcp_session_http::handle_read(boost::system::error_code &error, std::size_t) {
     if (error == boost::beast::http::error::end_of_stream) {
         m_socket.shutdown(boost::asio::ip::tcp::socket::shutdown_send, error);
         return;

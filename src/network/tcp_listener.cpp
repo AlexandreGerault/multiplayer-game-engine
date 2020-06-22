@@ -21,7 +21,7 @@ void tcp_listener::run() {
  */
 void tcp_listener::start_accept() {
     spdlog::debug("Start listening for incoming TCP connection...");
-    session_ptr new_connection = std::make_shared<tcp_ws_connection>(m_io_context);
+    session_ptr new_connection = std::make_shared<tcp_session>(m_io_context);
     spdlog::debug("New TCP connection pointer created.");
 
     m_acceptor.async_accept(
