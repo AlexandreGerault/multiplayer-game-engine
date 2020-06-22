@@ -11,8 +11,6 @@ namespace ww {
     using endpoint      = boost::asio::ip::tcp::endpoint;
     using acceptor      = boost::asio::ip::tcp::acceptor;
 
-    typedef std::shared_ptr<tcp_session_interface> session_ptr;
-
     class tcp_listener_interface {
     public:
         tcp_listener_interface() = delete;
@@ -24,7 +22,7 @@ namespace ww {
     protected:
         io_context &m_io_context;
         acceptor m_acceptor;
-        std::unordered_set<session_ptr> m_sessions;
+        std::unordered_set<std::shared_ptr<tcp_session_interface>> m_sessions;
     };
 }
 

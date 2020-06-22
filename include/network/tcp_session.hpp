@@ -19,7 +19,7 @@ namespace ww {
      * @brief Send and receive data using TCP.
      * Each packet follows the following format: {[HEADER (2 BYTES)][CONTENT {String} (SIZE CODED IN HEADER)].}
      */
-    class tcp_session : public std::enable_shared_from_this<tcp_session>, public tcp_session_interface {
+    class tcp_session : public tcp_session_interface, public std::enable_shared_from_this<tcp_session> {
     public:
         tcp_session() = delete;
 

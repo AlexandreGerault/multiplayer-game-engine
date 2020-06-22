@@ -22,11 +22,11 @@ void tcp_listener::run() {
  */
 void tcp_listener::start_accept() {
     spdlog::debug("Start listening for incoming TCP connection...");
-    session_ptr new_session = std::make_shared<tcp_session>(m_io_context);
+    std::shared_ptr<tcp_session_interface> new_session = std::make_shared<tcp_session>(m_io_context);
 
     m_acceptor.async_accept(
             new_session->socket(),
-            [this, &new_session](boost::system::error_code const &error) {
+            [this, new_session](boost::system::error_code const &error) {
                 handle_accept(new_session, error);
             }
     );
@@ -38,7 +38,8 @@ void tcp_listener::start_accept() {
  * @param new_connection
  * @param error
  */
-void tcp_listener::handle_accept(session_ptr new_session, boost::system::error_code const &error) {
+void tcp_listener::handle_accept(std::shared_ptr<tcp_session_interface> new_session,
+                                 boost::system::error_code const &error) {
     if (!error) {
         spdlog::info("New connection!");
         m_sessions.insert(new_session);

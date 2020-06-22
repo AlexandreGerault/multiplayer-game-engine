@@ -13,14 +13,14 @@ namespace ww {
     public:
         tcp_listener() = delete;
 
-        tcp_listener(boost::asio::io_context &io_context, boost::asio::ip::tcp::endpoint const &enpoint);
+        tcp_listener(io_context &context, endpoint const &ep);
 
         void run() override;
 
     private:
         void start_accept();
 
-        void handle_accept(session_ptr new_session, boost::system::error_code const& error);
+        void handle_accept(std::shared_ptr<tcp_session_interface>  new_session, boost::system::error_code const& error);
     };
 }// namespace ww
 

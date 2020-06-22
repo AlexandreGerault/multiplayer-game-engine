@@ -101,9 +101,9 @@ void tcp_session::write(packet const& p) {
     boost::asio::async_write(
             m_socket,
             boost::asio::buffer(payload),
-            [this, payload = std::move(&payload)](const boost::system::error_code &ec, std::size_t bytes_transferred) {
+            [self = shared_from_this(), payload = std::move(&payload)](const boost::system::error_code &ec, std::size_t bytes_transferred) {
                 spdlog::debug("Calling write handler");
-                handle_write();
+                self->handle_write();
             }
     );
 }
