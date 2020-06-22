@@ -5,6 +5,9 @@ project(WerewolfServer VERSION 0.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+set(GCC_COVERAGE_COMPILE_FLAGS "-D_GLIBCXX_DEBUG")
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
 if (WIN32)
     message(STATUS "Windows Platform")
     find_package(Boost 1.73.0 COMPONENTS thread system REQUIRED PATHS libs/boost_1_73_0_windows)
@@ -29,10 +32,11 @@ if(Boost_FOUND)
             src/rooms/text_room.cpp
             src/rooms/voice_room.cpp
             src/rooms/server_rooms.cpp
-            src/network/tcp_server.cpp
-            src/network/tcp_connection.cpp
+            src/network/tcp_listener.cpp
+            src/network/tcp_session.cpp
             src/core/application.cpp src/network/packet.cpp
-            )
+            src/network/tcp_listener_interface.cpp
+            src/network/tcp_session_interface.cpp include/network/tcp_session_interface.hpp)
 
     add_library(server_lib ${SERVER_SOURCE_FILES})
     target_include_directories(server_lib PUBLIC include)

@@ -1,22 +1,25 @@
-#include "network/tcp_connection.hpp"
+#include "network/tcp_session.hpp"
 
 using namespace ww;
 
-tcp_connection::tcp_connection(boost::asio::io_context &context) : m_socket{context} {}
+tcp_session::tcp_session(boost::asio::io_context &context) : m_socket{context} {}
 
-boost::asio::ip::tcp::socket &tcp_connection::socket() {
+boost::asio::ip::tcp::socket &tcp_session::socket() {
     return m_socket;
 }
 
-void tcp_connection::start() {
+void tcp_session::start() {
+    spdlog::debug("Starting the session");
     write("Début de connexion");
+    spdlog::debug("Wrote that sessions started");
     read_header();
+    spdlog::debug("Called read_header");
 }
 
 /**
  * @brief Start an synchronous operation to read 2 Bytes where the header is encoded
  */
-void tcp_connection::read_header() {
+void tcp_session::read_header() {
     boost::asio::async_read(
             m_socket,
             boost::asio::buffer(m_header_buffer),
@@ -32,7 +35,7 @@ void tcp_connection::read_header() {
  * @param error
  * @param bytes_transferred
  */
-void tcp_connection::handle_read_header(const boost::system::error_code &error, std::size_t bytes_transferred) {
+void tcp_session::handle_read_header(const boost::system::error_code &error, std::size_t bytes_transferred) {
     spdlog::debug("Packet header received");
     header_size_type size = *reinterpret_cast<header_size_type *>(m_header_buffer.data());
     if (!error) {
@@ -51,7 +54,7 @@ void tcp_connection::handle_read_header(const boost::system::error_code &error, 
 /**
  * @brief Start an synchronous operation to read the amount of data indicated by the header.
  */
-void tcp_connection::read_body() {
+void tcp_session::read_body() {
     boost::asio::async_read(
             m_socket,
             boost::asio::buffer(m_body_buffer),
@@ -67,7 +70,7 @@ void tcp_connection::read_body() {
  * @param error
  * @param bytes_transferred
  */
-void tcp_connection::handle_read_body(const boost::system::error_code &error, std::size_t bytes_transferred) {
+void tcp_session::handle_read_body(const boost::system::error_code &error, std::size_t bytes_transferred) {
     spdlog::debug("Packet body received");
     if (!error) {
         std::string message{m_body_buffer.begin(), m_body_buffer.end()};
@@ -84,19 +87,23 @@ void tcp_connection::handle_read_body(const boost::system::error_code &error, st
  * @brief Send a formatted packet [HEADER (2 Bytes), STRING].
  * @param message
  */
-void tcp_connection::write(std::string const &message) {
+void tcp_session::write(std::string const &message) {
+    spdlog::debug("Write a message");
     packet my_packet{message};
 
     write(my_packet);
 }
 
-void tcp_connection::write(packet const& p) {
+void tcp_session::write(packet const& p) {
+    spdlog::debug("Write a packet");
     auto payload {p.payload()};
+    spdlog::debug("Created the payload to send");
     boost::asio::async_write(
             m_socket,
             boost::asio::buffer(payload),
-            [self = shared_from_this(), payload = std::move(payload)](const boost::system::error_code &ec, std::size_t bytes_transferred) {
-                self->handle_write();
+            [this, payload = std::move(&payload)](const boost::system::error_code &ec, std::size_t bytes_transferred) {
+                spdlog::debug("Calling write handler");
+                handle_write();
             }
     );
 }
@@ -104,13 +111,13 @@ void tcp_connection::write(packet const& p) {
 /**
  * @brief Display a success message.
  */
-void tcp_connection::handle_write() {
+void tcp_session::handle_write() {
     spdlog::debug("Write method handler");
 }
 
 /**
  * @brief Free allocated memory.
  */
-void tcp_connection::stop() {
+void tcp_session::stop() {
     // notify(CONNECTION_EVENTS::END);
 }

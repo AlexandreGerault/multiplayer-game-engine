@@ -5,7 +5,7 @@
 #include <set>
 #include <string>
 #include "core/configuration.hpp"
-#include "network/tcp_connection.hpp"
+#include "network/tcp_session.hpp"
 
 namespace ww {
     enum class room_state {
@@ -22,14 +22,14 @@ namespace ww {
 
         virtual void start() = 0;
         virtual std::string name() const { return m_name; }
-        virtual void leave(std::shared_ptr<tcp_connection> client);
-        virtual void join(std::shared_ptr<tcp_connection> client);
+        virtual void leave(std::shared_ptr<tcp_session> client);
+        virtual void join(std::shared_ptr<tcp_session> client);
 
     protected:
         configuration m_config;
         room_state m_state;
         std::string m_name;
-        std::set<std::shared_ptr<tcp_connection>> m_clients;
+        std::set<std::shared_ptr<tcp_session>> m_clients;
     };
 }// namespace ww
 

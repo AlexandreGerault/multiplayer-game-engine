@@ -5,7 +5,7 @@
 #include <string>
 #include <spdlog/spdlog.h>
 #include "core/configuration.hpp"
-#include "network/tcp_server.hpp"
+#include "network/tcp_listener.hpp"
 #include "rooms/server_rooms.hpp"
 
 namespace ww {
@@ -14,7 +14,7 @@ namespace ww {
         application(boost::asio::io_context &io_context, boost::asio::ip::tcp::endpoint const& endpoint);
     private:
         configuration m_config;
-        tcp_server m_server;
+        tcp_listener m_server;
 		server_rooms m_rooms;
 	};
 }
