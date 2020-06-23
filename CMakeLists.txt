@@ -38,7 +38,7 @@ if(Boost_FOUND)
             src/network/tcp_listener_interface.cpp
             src/network/tcp_session_interface.cpp
             src/network/tcp_session_websocket.cpp
-            )
+            src/network/tcp_listener_websocket.cpp include/network/tcp_listener_websocket.hpp)
 
     add_library(server_lib ${SERVER_SOURCE_FILES})
     target_include_directories(server_lib PUBLIC include)

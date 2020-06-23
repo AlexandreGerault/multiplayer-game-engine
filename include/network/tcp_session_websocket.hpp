@@ -4,13 +4,13 @@
 #define BOOST_BIND_GLOBAL_PLACEHOLDERS
 
 #include <boost/asio.hpp>
-#include <boost/beast/core.hpp>
+#include <boost/beast.hpp>
 #include <memory>
 
 #include "network/tcp_session_interface.hpp"
 
 namespace ww {
-    class tcp_session_websocket : public tcp_session_interface, std::enable_shared_from_this<tcp_session_websocket> {
+    class tcp_session_websocket : public tcp_session_interface {
     public:
         tcp_session_websocket() = delete;
 
@@ -20,12 +20,10 @@ namespace ww {
 
         void stop() override;
 
-        void write(std::string const &message) override;
-
         boost::asio::ip::tcp::socket &socket() override;
 
     private:
-
+        boost::beast::websocket::stream<boost::beast::tcp_stream> m_websocket;
     };
 }
 

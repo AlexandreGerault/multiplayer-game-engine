@@ -12,7 +12,7 @@ tcp_listener::tcp_listener(boost::asio::io_context &context, boost::asio::ip::tc
  * @brief start the server events loop.
  */
 void tcp_listener::run() {
-    spdlog::debug("Run server");
+    spdlog::debug("Run TCP server");
     start_accept();
 
     m_io_context.run();
