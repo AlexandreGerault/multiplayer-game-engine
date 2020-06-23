@@ -12,6 +12,7 @@ boost::asio::ip::tcp::socket &tcp_session_websocket::socket() {
 
 void tcp_session_websocket::start() {
     spdlog::debug("Starting a websocket session");
+    m_websocket.accept();
     read_header();
 }
 

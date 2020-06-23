@@ -5,9 +5,6 @@ project(WerewolfServer VERSION 0.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(GCC_COVERAGE_COMPILE_FLAGS "-fsanitize=address -D_GLIBCXX_DEBUG")
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
-
 if (WIN32)
     message(STATUS "Windows Platform")
     find_package(Boost 1.73.0 COMPONENTS thread system regex date_time REQUIRED PATHS libs/boost_1_73_0_windows)

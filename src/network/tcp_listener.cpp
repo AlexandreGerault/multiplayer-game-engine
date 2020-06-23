@@ -14,8 +14,6 @@ tcp_listener::tcp_listener(boost::asio::io_context &context, boost::asio::ip::tc
 void tcp_listener::run() {
     spdlog::debug("Run TCP server");
     start_accept();
-
-    m_io_context.run();
 }
 
 /**

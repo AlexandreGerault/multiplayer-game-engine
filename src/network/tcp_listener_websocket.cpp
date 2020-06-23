@@ -27,5 +27,6 @@ void tcp_listener_websocket::start_accept() {
 void tcp_listener_websocket::handle_accept(std::shared_ptr<tcp_session_interface> new_session,
                                            boost::system::error_code const &error) {
     spdlog::debug("New websocket connection accepted");
+    new_session->start();
+    start_accept();
 }
-
