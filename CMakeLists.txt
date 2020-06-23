@@ -14,7 +14,7 @@ if (WIN32)
 endif(WIN32)
 if (UNIX)
     message(STATUS "Unix Platform")
-    find_package(Boost 1.73.0 COMPONENTS thread system regex date_time REQUIRED PATHS libs/boost_1_73_0_arch_linux)
+    find_package(Boost 1.73.0 COMPONENTS thread system regex date_time REQUIRED PATHS libs/boost_1_73_0_unix)
 endif(UNIX)
 
 if(NOT TARGET spdlog)
@@ -38,7 +38,8 @@ if(Boost_FOUND)
             src/network/tcp_listener_interface.cpp
             src/network/tcp_session_interface.cpp
             src/network/tcp_session_websocket.cpp
-            src/network/tcp_listener_websocket.cpp include/network/tcp_listener_websocket.hpp)
+            src/network/tcp_listener_websocket.cpp
+            )
 
     add_library(server_lib ${SERVER_SOURCE_FILES})
     target_include_directories(server_lib PUBLIC include)

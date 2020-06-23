@@ -2,7 +2,7 @@
 
 using namespace ww;
 
-tcp_session::tcp_session(boost::asio::io_context &context) : m_socket{context} {}
+tcp_session::tcp_session(boost::asio::io_context &context) : m_socket{context}, tcp_session_interface{} {}
 
 boost::asio::ip::tcp::socket &tcp_session::socket() {
     return m_socket;

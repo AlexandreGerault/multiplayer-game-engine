@@ -9,7 +9,7 @@
 #include "network/packet.hpp"
 
 namespace ww {
-    class tcp_session_interface : std::enable_shared_from_this<tcp_session_interface> {
+    class tcp_session_interface : public std::enable_shared_from_this<tcp_session_interface> {
     public:
         virtual void start() = 0;
 

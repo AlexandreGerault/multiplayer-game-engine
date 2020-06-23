@@ -2,7 +2,7 @@
 
 using namespace ww;
 
-tcp_session_websocket::tcp_session_websocket(boost::asio::io_context &context) : m_websocket{context} {
+tcp_session_websocket::tcp_session_websocket(boost::asio::io_context &context) : m_websocket{context}, tcp_session_interface{} {
 
 }
 
