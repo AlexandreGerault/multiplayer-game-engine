@@ -1,8 +1,6 @@
 #ifndef WEREWOLFSERVER_TCP_SESSION_WEBSOCKET_HPP
 #define WEREWOLFSERVER_TCP_SESSION_WEBSOCKET_HPP
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
-
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
 #include <memory>
