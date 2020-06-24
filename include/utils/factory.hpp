@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <cassert>
 
 namespace ww {
     template<class Object, class... Args>
@@ -37,7 +38,8 @@ namespace ww {
          */
         std::unique_ptr<Object> make(std::string const &key, Args &&... args) const {
             auto it = m_registry.find(key);
-            auto&& r = it->second;
+            assert(("[FACTORY] Key not found", it != m_registry.end()));
+            auto& r = it->second;
             return r(std::forward<Args>(args)...);
         }
 

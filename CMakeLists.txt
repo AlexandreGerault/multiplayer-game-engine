@@ -7,11 +7,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 if (WIN32)
     message(STATUS "Windows Platform")
-    find_package(Boost 1.73.0 COMPONENTS thread system REQUIRED PATHS libs/boost_1_73_0_windows)
+    find_package(Boost 1.73.0 COMPONENTS thread system regex date_time REQUIRED PATHS libs/boost_1_73_0_windows)
 endif(WIN32)
 if (UNIX)
     message(STATUS "Unix Platform")
-    find_package(Boost 1.73.0 COMPONENTS thread system REQUIRED PATHS libs/boost_1_73_0_arch_linux)
+    find_package(Boost 1.73.0 COMPONENTS thread system regex date_time REQUIRED PATHS libs/boost_1_73_0_unix)
 endif(UNIX)
 
 if(NOT TARGET spdlog)
@@ -29,9 +29,13 @@ if(Boost_FOUND)
             src/rooms/text_room.cpp
             src/rooms/voice_room.cpp
             src/rooms/server_rooms.cpp
-            src/network/tcp_server.cpp
-            src/network/tcp_connection.cpp
+            src/network/tcp_listener.cpp
+            src/network/tcp_session.cpp
             src/core/application.cpp src/network/packet.cpp
+            src/network/tcp_listener_interface.cpp
+            src/network/tcp_session_interface.cpp
+            src/network/tcp_session_websocket.cpp
+            src/network/tcp_listener_websocket.cpp
             )
 
     add_library(server_lib ${SERVER_SOURCE_FILES})
