@@ -20,8 +20,15 @@ namespace ww {
 
         boost::asio::ip::tcp::socket &socket() override;
 
+        void write(std::string const &message) override;
+
     private:
         boost::beast::websocket::stream<boost::beast::tcp_stream> m_websocket;
+        boost::beast::flat_buffer m_buffer;
+
+        void read();
+
+        void handle_read(const boost::system::error_code &error, std::size_t bytes_transferred);
     };
 }
 

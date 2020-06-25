@@ -12,7 +12,7 @@ tcp_listener::tcp_listener(boost::asio::io_context &context, boost::asio::ip::tc
  * @brief start the server events loop.
  */
 void tcp_listener::run() {
-    spdlog::debug("Run TCP server");
+    spdlog::debug("Run TCP server on port {}", m_acceptor.local_endpoint().port());
     start_accept();
 }
 
@@ -45,5 +45,7 @@ void tcp_listener::handle_accept(std::shared_ptr<tcp_session_interface> new_sess
         spdlog::info("Start the session...");
         new_session->start();
         start_accept();
+    } else {
+        spdlog::error("[TCP handle accept] {}", error.message());
     }
 }
