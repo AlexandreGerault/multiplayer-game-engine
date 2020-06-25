@@ -2,12 +2,10 @@
 
 using namespace ww;
 
-tcp_listener_websocket::tcp_listener_websocket(boost::asio::io_context &context,
-                                               const boost::asio::ip::tcp::endpoint &ep) : tcp_listener_interface{
-        context, ep} {}
+tcp_listener_websocket::tcp_listener_websocket(boost::asio::io_context &context, const boost::asio::ip::tcp::endpoint &ep) : tcp_listener_interface{context, ep} {}
 
 void tcp_listener_websocket::run() {
-    spdlog::debug("Run websocket server");
+    spdlog::debug("Run websocket server on port {}", m_acceptor.local_endpoint().port());
 
     start_accept();
 }
@@ -26,7 +24,14 @@ void tcp_listener_websocket::start_accept() {
 
 void tcp_listener_websocket::handle_accept(std::shared_ptr<tcp_session_interface> new_session,
                                            boost::system::error_code const &error) {
-    spdlog::debug("New websocket connection accepted");
-    new_session->start();
-    start_accept();
+    if (!error) {
+        spdlog::debug("New websocket connection accepted");
+        m_sessions.insert(new_session);
+        spdlog::info("Start the websocket session...");
+        new_session->start();
+        start_accept();
+    } else {
+        spdlog::error("[Websocket handle accept] {}", error.message());
+    }
+    
 }
