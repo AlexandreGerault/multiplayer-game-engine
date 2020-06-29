@@ -21,7 +21,7 @@ namespace ww {
 
         void handle_accept(std::shared_ptr<tcp_session_interface>  new_session, boost::system::error_code const& error);
     };
-}// namespace ww
+} // namespace ww
 
 
 #endif//WEREWOLFSERVER_TCP_LISTENER_HPP

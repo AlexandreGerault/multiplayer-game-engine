@@ -13,7 +13,11 @@ boost::asio::ip::tcp::socket &tcp_session_websocket::socket() {
 
 void tcp_session_websocket::start() {
     spdlog::debug("Starting a websocket session");
-    m_websocket.accept();
+    try {
+        m_websocket.accept();
+    } catch (boost::system::system_error &ec) {
+        spdlog::error("[WS] Failed to ws.accept(): {}", ec.what());
+    }
     read();
 }
 

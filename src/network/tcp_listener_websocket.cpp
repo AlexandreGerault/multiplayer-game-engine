@@ -2,7 +2,9 @@
 
 using namespace ww;
 
-tcp_listener_websocket::tcp_listener_websocket(boost::asio::io_context &context, const boost::asio::ip::tcp::endpoint &ep) : tcp_listener_interface{context, ep} {}
+tcp_listener_websocket::tcp_listener_websocket(boost::asio::io_context &context, const boost::asio::ip::tcp::endpoint &ep) : tcp_listener_interface{context, ep} {
+    spdlog::debug("Websocket server created");
+}
 
 void tcp_listener_websocket::run() {
     spdlog::debug("Run websocket server on port {}", m_acceptor.local_endpoint().port());
