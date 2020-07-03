@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.13)
 project(WerewolfServer VERSION 0.1.0)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -22,12 +22,18 @@ set(SERVER_SOURCE_FILES
     src/network/tcp_session_interface.cpp
     src/network/tcp_session_websocket.cpp
     src/network/tcp_listener_websocket.cpp
+    src/utils/observable.cpp
+    src/network/data_received_event.cpp
+    src/ui/command_observer.cpp
     )
 
 add_library(server_lib ${SERVER_SOURCE_FILES})
-target_include_directories(server_lib PUBLIC include)
+target_include_directories(server_lib
+	PUBLIC include
+	PUBLIC ${Boost_INCLUDE_DIRS}
+	)
 target_link_libraries(server_lib
-                      PUBLIC Boost::headers
+		      PUBLIC ${Boost_LIBRARIES}
                       PRIVATE spdlog::spdlog)
 target_compile_definitions(server_lib
                            PUBLIC

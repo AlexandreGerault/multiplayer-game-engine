@@ -3,8 +3,8 @@
 
 using namespace ww;
 
-tcp_listener::tcp_listener(boost::asio::io_context &context, boost::asio::ip::tcp::endpoint const &ep)
-        : tcp_listener_interface{context, ep} {
+tcp_listener::tcp_listener(boost::asio::io_context &context, boost::asio::ip::tcp::endpoint const &ep, std::weak_ptr<observer> obs)
+        : tcp_listener_interface{context, ep, obs} {
     spdlog::debug("TCP server created");
 }
 
@@ -22,6 +22,7 @@ void tcp_listener::run() {
 void tcp_listener::start_accept() {
     spdlog::debug("Start listening for incoming TCP connection...");
     std::shared_ptr<tcp_session_interface> new_session = std::make_shared<tcp_session>(m_io_context);
+    new_session->add_observer(m_command_observer);
 
     m_acceptor.async_accept(
             new_session->socket(),
