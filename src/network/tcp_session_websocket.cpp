@@ -51,6 +51,7 @@ void tcp_session_websocket::handle_read(const boost::system::error_code &error, 
     if (!error) {
         std::string message{boost::beast::buffers_to_string(m_buffer.data())};
         spdlog::debug("Websocket message: {}", message);
+        notify(std::make_shared<data_received_event>(shared_from_this(), message));
         m_buffer.consume(m_buffer.size());
         read();
     } else {

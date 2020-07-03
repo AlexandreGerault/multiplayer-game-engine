@@ -22,6 +22,9 @@ set(SERVER_SOURCE_FILES
     src/network/tcp_session_interface.cpp
     src/network/tcp_session_websocket.cpp
     src/network/tcp_listener_websocket.cpp
+    src/utils/observable.cpp
+    src/network/data_received_event.cpp
+    src/ui/command_observer.cpp
     )
 
 add_library(server_lib ${SERVER_SOURCE_FILES})

@@ -106,7 +106,7 @@ void tcp_session::handle_read_body(const boost::system::error_code &error, std::
     if (!error) {
         std::string message{m_body_buffer.begin(), m_body_buffer.end()};
         spdlog::debug("Packet body: {}", message);
-        // notify(CONNECTION_EVENTS::DATA_RECEIVED, message);
+        notify(std::make_shared<data_received_event>(shared_from_this(), message));
         read_header();
     } else {
         spdlog::error("Error processing packet body: {}", error.message());

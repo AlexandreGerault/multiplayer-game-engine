@@ -12,7 +12,7 @@ namespace ww {
     public:
         tcp_listener_websocket() = delete;
 
-        tcp_listener_websocket(boost::asio::io_context &context, boost::asio::ip::tcp::endpoint const &ep);
+        tcp_listener_websocket(boost::asio::io_context &context, boost::asio::ip::tcp::endpoint const &ep, std::weak_ptr<observer> obs);
 
         void run() override;
 

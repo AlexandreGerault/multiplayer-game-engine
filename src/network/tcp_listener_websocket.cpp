@@ -2,7 +2,7 @@
 
 using namespace ww;
 
-tcp_listener_websocket::tcp_listener_websocket(boost::asio::io_context &context, const boost::asio::ip::tcp::endpoint &ep) : tcp_listener_interface{context, ep} {
+tcp_listener_websocket::tcp_listener_websocket(boost::asio::io_context &context, const boost::asio::ip::tcp::endpoint &ep, std::weak_ptr<observer> obs) : tcp_listener_interface{context, ep, obs} {
     spdlog::debug("Websocket server created");
 }
 
@@ -15,6 +15,7 @@ void tcp_listener_websocket::run() {
 void tcp_listener_websocket::start_accept() {
     spdlog::debug("Start listening for incoming websocket connection...");
     std::shared_ptr<tcp_session_interface> new_session = std::make_shared<tcp_session_websocket>(m_io_context);
+    new_session->add_observer(m_command_observer);
 
     m_acceptor.async_accept(
             new_session->socket(),
