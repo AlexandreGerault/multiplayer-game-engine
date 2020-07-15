@@ -25,15 +25,18 @@ set(SERVER_SOURCE_FILES
     src/utils/observable.cpp
     src/network/data_received_event.cpp
     src/ui/command_observer.cpp
+    src/ui/command_registry.cpp
+    src/ui/command_interface.cpp
+    src/ui/command_executor.cpp
     )
 
 add_library(server_lib ${SERVER_SOURCE_FILES})
 target_include_directories(server_lib
-	PUBLIC include
-	PUBLIC ${Boost_INCLUDE_DIRS}
-	)
+        PUBLIC include
+        PUBLIC ${Boost_INCLUDE_DIRS}
+        )
 target_link_libraries(server_lib
-		      PUBLIC ${Boost_LIBRARIES}
+                      PUBLIC ${Boost_LIBRARIES}
                       PRIVATE spdlog::spdlog)
 target_compile_definitions(server_lib
                            PUBLIC
