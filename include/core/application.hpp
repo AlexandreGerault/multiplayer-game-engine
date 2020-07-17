@@ -13,6 +13,9 @@
 #include "rooms/server_rooms.hpp"
 #include "utils/factory.hpp"
 #include "ui/command_observer.hpp"
+#include "ui/command_registry.hpp"
+
+#include "ui/command_executors/ping_command_executor.hpp"
 
 namespace ww {
     class application {
@@ -27,7 +30,9 @@ namespace ww {
 
     private:
         void init_server_factory();
+        command_registry init_application_commands();
 
+        command_registry m_registry;
         std::shared_ptr<observer> m_command_observer;
         factory<
             tcp_listener_interface,

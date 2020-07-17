@@ -12,6 +12,7 @@ namespace ww {
     public:
         data_received_event() = delete;
         data_received_event(std::shared_ptr<tcp_session_interface> session_ptr, std::string data);
+        std::string content() const;
 
     private:
         std::shared_ptr<tcp_session_interface> m_session_ptr;
