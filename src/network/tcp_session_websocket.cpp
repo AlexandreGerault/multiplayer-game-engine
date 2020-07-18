@@ -1,6 +1,6 @@
 #include "network/tcp_session_websocket.hpp"
 
-using namespace ww;
+using namespace mge;
 
 tcp_session_websocket::tcp_session_websocket(boost::asio::io_context &context) : m_websocket{context},
                                                                                  tcp_session_interface{} {

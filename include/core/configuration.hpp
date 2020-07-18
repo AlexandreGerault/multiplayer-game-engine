@@ -1,5 +1,5 @@
-#ifndef WEREWOLF_CONFIGURATION_HPP
-#define WEREWOLF_CONFIGURATION_HPP
+#ifndef MGE_CONFIGURATION_HPP
+#define MGE_CONFIGURATION_HPP
 
 #include <fstream>
 #include <sstream>
@@ -47,7 +47,7 @@ struct decoder<std::string> {
     }
 };
 
-namespace ww {
+namespace mge {
     class configuration {
     public:
         configuration();
@@ -88,6 +88,6 @@ namespace ww {
         std::unordered_map<std::string, std::string> m_fields;
         std::string m_file;
     };
-}// namespace ww
+}// namespace mge
 
-#endif// WEREWOLF_CONFIGURATION_HPP
+#endif// MGE_CONFIGURATION_HPP

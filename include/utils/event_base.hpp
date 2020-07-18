@@ -1,15 +1,15 @@
-#ifndef WEREWOLF_EVENT_BASE_HPP
-#define WEREWOLF_EVENT_BASE_HPP
+#ifndef MGE_EVENT_BASE_HPP
+#define MGE_EVENT_BASE_HPP
 
 #include <spdlog/spdlog.h>
 
-namespace ww {
+namespace mge {
     class event_base {
     public:
         virtual ~event_base() {
             spdlog::debug("Event destructued");
         }
     };
-} // namespace ww
+} // namespace mge
 
-#endif// WEREWOLF_EVENT_BASE_HPP
+#endif// MGE_EVENT_BASE_HPP

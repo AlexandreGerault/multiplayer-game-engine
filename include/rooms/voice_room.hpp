@@ -1,15 +1,15 @@
-#ifndef WEREWOLF_VOICE_ROOM_HPP
-#define WEREWOLF_VOICE_ROOM_HPP
+#ifndef MGE_VOICE_ROOM_HPP
+#define MGE_VOICE_ROOM_HPP
 
 #include "rooms/room_interface.hpp"
 
-namespace ww {
+namespace mge {
     class voice_room : public room_interface {
     public:
         explicit voice_room(const std::string& name);
         void start() override;
     };
-}// namespace ww
+}// namespace mge
 
 
-#endif//WEREWOLF_VOICE_ROOM_HPP
+#endif//MGE_VOICE_ROOM_HPP

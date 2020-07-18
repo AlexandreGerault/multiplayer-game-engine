@@ -1,5 +1,5 @@
-#ifndef WEREWOLF_APPLICATION_HPP
-#define WEREWOLF_APPLICATION_HPP
+#ifndef MGE_APPLICATION_HPP
+#define MGE_APPLICATION_HPP
 
 #include <boost/asio/io_context.hpp>
 #include <memory>
@@ -17,7 +17,7 @@
 
 #include "ui/command_executors/ping_command_executor.hpp"
 
-namespace ww {
+namespace mge {
     class application {
     public:
         application();
@@ -46,4 +46,4 @@ namespace ww {
     };
 }
 
-#endif //WEREWOLF_APPLICATION_HPP
+#endif //MGE_APPLICATION_HPP

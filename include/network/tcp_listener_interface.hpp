@@ -1,5 +1,5 @@
-#ifndef WEREWOLFSERVER_TCP_LISTENER_INTERFACE_HPP
-#define WEREWOLFSERVER_TCP_LISTENER_INTERFACE_HPP
+#ifndef MGE_TCP_LISTENER_INTERFACE_HPP
+#define MGE_TCP_LISTENER_INTERFACE_HPP
 
 #include <boost/asio.hpp>
 #include <unordered_set>
@@ -8,7 +8,7 @@
 #include "network/tcp_session_interface.hpp"
 #include "utils/observer.hpp"
 
-namespace ww {
+namespace mge {
 
     class tcp_listener_interface {
     public:
@@ -27,4 +27,4 @@ namespace ww {
 }
 
 
-#endif //WEREWOLFSERVER_TCP_LISTENER_INTERFACE_HPP
+#endif //MGE_TCP_LISTENER_INTERFACE_HPP

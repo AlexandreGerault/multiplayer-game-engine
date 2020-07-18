@@ -1,5 +1,5 @@
-#ifndef WEREWOLFSERVER_TCP_SESSION_INTERFACE_HPP
-#define WEREWOLFSERVER_TCP_SESSION_INTERFACE_HPP
+#ifndef MGE_TCP_SESSION_INTERFACE_HPP
+#define MGE_TCP_SESSION_INTERFACE_HPP
 
 #include <boost/asio.hpp>
 #include <memory>
@@ -10,7 +10,7 @@
 #include "network/packet.hpp"
 #include "utils/observable.hpp"
 
-namespace ww {
+namespace mge {
     class tcp_session_interface : public std::enable_shared_from_this<tcp_session_interface>, public observable {
     public:
         virtual void start() = 0;
@@ -26,4 +26,4 @@ namespace ww {
     };
 }
 
-#endif //WEREWOLFSERVER_TCP_SESSION_INTERFACE_HPP
+#endif //MGE_TCP_SESSION_INTERFACE_HPP

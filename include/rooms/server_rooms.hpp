@@ -1,12 +1,12 @@
-#ifndef WEREWOLF_SERVER_ROOMS_HPP
-#define WEREWOLF_SERVER_ROOMS_HPP
+#ifndef MGE_ROOMS_HPP
+#define MGE_ROOMS_HPP
 
 #include <map>
 #include <memory>
 #include "rooms/room_interface.hpp"
 #include "utils/factory.hpp"
 
-namespace ww {
+namespace mge {
     class server_rooms {
     public:
         server_rooms();
@@ -33,7 +33,7 @@ namespace ww {
         std::map<std::string, std::unique_ptr<room_interface>> m_removed_rooms;
         factory<room_interface, std::string> m_room_factory;
     };
-}// namespace ww
+}// namespace mge
 
 
-#endif//WEREWOLF_SERVER_ROOMS_HPP
+#endif//MGE_ROOMS_HPP

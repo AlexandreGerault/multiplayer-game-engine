@@ -2,7 +2,7 @@
 #include <rooms/text_room.hpp>
 #include <rooms/voice_room.hpp>
 
-using namespace ww;
+using namespace mge;
 
 server_rooms::server_rooms() {
     // TODO: Load rooms from files (serialization)

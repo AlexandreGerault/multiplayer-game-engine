@@ -1,5 +1,5 @@
-#ifndef WEREWOLF_COMMAND_OBSERVER_HPP
-#define WEREWOLF_COMMAND_OBSERVER_HPP
+#ifndef MGE_COMMAND_OBSERVER_HPP
+#define MGE_COMMAND_OBSERVER_HPP
 
 #include <memory>
 #include <spdlog/spdlog.h>
@@ -9,7 +9,7 @@
 #include "network/data_received_event.hpp"
 #include "ui/command_registry.hpp"
 
-namespace ww {
+namespace mge {
     class command_observer : public observer {
     public:
         command_observer(command_registry  &registry) : m_registry{registry} {
@@ -23,4 +23,4 @@ namespace ww {
     };
 }
 
-#endif // WEREWOLF_COMMAND_OBSERVER_HPP
+#endif // MGE_COMMAND_OBSERVER_HPP

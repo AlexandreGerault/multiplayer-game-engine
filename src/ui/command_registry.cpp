@@ -1,6 +1,6 @@
 #include "ui/command_registry.hpp"
 
-using namespace ww;
+using namespace mge;
 
 void command_registry::registers(command& cmd) {
     m_commands.insert({cmd.name(), std::move(cmd)});

@@ -1,11 +1,11 @@
-#ifndef WEREWOLFSERVER_COMMAND_REGISTRY_HPP
-#define WEREWOLFSERVER_COMMAND_REGISTRY_HPP
+#ifndef MGE_COMMAND_REGISTRY_HPP
+#define MGE_COMMAND_REGISTRY_HPP
 
 #include <unordered_map>
 
 #include "ui/command.hpp"
 
-namespace ww {
+namespace mge {
     class command_registry {
     public:
         command_registry() {}
@@ -18,4 +18,4 @@ namespace ww {
 }
 
 
-#endif //WEREWOLFSERVER_COMMAND_REGISTRY_HPP
+#endif //MGE_COMMAND_REGISTRY_HPP

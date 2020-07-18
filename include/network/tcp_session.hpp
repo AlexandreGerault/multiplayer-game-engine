@@ -1,5 +1,5 @@
-#ifndef WEREWOLFSERVER_TCP_SESSION_HPP
-#define WEREWOLFSERVER_TCP_SESSION_HPP
+#ifndef MGE_TCP_SESSION_HPP
+#define MGE_TCP_SESSION_HPP
 
 #include <memory>
 #include <boost/asio.hpp>
@@ -13,7 +13,7 @@
 
 #include "network/tcp_session_interface.hpp"
 
-namespace ww {
+namespace mge {
     /**
      * @brief Send and receive data using TCP.
      * Each packet follows the following format: {[HEADER (2 BYTES)][CONTENT {String} (SIZE CODED IN HEADER)].}
@@ -56,4 +56,4 @@ namespace ww {
 }
 
 
-#endif //WEREWOLFSERVER_TCP_SESSION_HPP
+#endif //MGE_TCP_SESSION_HPP

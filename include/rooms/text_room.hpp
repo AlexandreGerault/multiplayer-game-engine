@@ -1,15 +1,15 @@
-#ifndef WEREWOLF_TEXT_ROOM_HPP
-#define WEREWOLF_TEXT_ROOM_HPP
+#ifndef MGE_TEXT_ROOM_HPP
+#define MGE_TEXT_ROOM_HPP
 
 #include "rooms/room_interface.hpp"
 
-namespace ww {
+namespace mge {
     class text_room : public room_interface {
     public:
         explicit text_room(std::string const &name);
         void start() override;
     };
-}// namespace ww
+}// namespace mge
 
 
-#endif//WEREWOLF_TEXT_ROOM_HPP
+#endif//MGE_TEXT_ROOM_HPP

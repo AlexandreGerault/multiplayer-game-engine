@@ -1,6 +1,6 @@
 #include "ui/command.hpp"
 
-using namespace ww;
+using namespace mge;
 
 std::string command::name() const {
     return m_name;

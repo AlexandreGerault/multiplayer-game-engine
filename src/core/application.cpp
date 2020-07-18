@@ -1,7 +1,7 @@
 #include "core/application.hpp"
 #include <string>
 
-using namespace ww;
+using namespace mge;
 
 application::application() 
     : m_config{"general.config"}
@@ -54,7 +54,7 @@ command_registry application::init_application_commands() {
     command ping{
         "ping",
         "test latency",
-        std::make_unique<mge::ping_command_executor>()
+        std::make_unique<ping_command_executor>()
     };
 
     _registry.registers(ping);

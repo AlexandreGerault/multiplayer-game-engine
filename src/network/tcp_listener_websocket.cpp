@@ -1,6 +1,6 @@
 #include "network/tcp_listener_websocket.hpp"
 
-using namespace ww;
+using namespace mge;
 
 tcp_listener_websocket::tcp_listener_websocket(boost::asio::io_context &context, const boost::asio::ip::tcp::endpoint &ep, std::weak_ptr<observer> obs) : tcp_listener_interface{context, ep, obs} {
     spdlog::debug("Websocket server created");

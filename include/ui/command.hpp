@@ -1,11 +1,11 @@
-#ifndef WEREWOLFSERVER_COMMAND_INTERFACE_HPP
-#define WEREWOLFSERVER_COMMAND_INTERFACE_HPP
+#ifndef MGE_COMMAND_INTERFACE_HPP
+#define MGE_COMMAND_INTERFACE_HPP
 
 #include<memory>
 #include <string>
 #include "ui/command_executor.hpp"
 
-namespace ww {
+namespace mge {
     class command {
     public:
         command() = delete;
@@ -21,4 +21,4 @@ namespace ww {
 }
 
 
-#endif //WEREWOLFSERVER_COMMAND_INTERFACE_HPP
+#endif //MGE_COMMAND_INTERFACE_HPP

@@ -1,7 +1,7 @@
 #include "network/tcp_listener.hpp"
 #include <iostream>
 
-using namespace ww;
+using namespace mge;
 
 tcp_listener::tcp_listener(boost::asio::io_context &context, boost::asio::ip::tcp::endpoint const &ep, std::weak_ptr<observer> obs)
         : tcp_listener_interface{context, ep, obs} {

@@ -1,6 +1,6 @@
 #include "network/tcp_session.hpp"
 
-using namespace ww;
+using namespace mge;
 
 tcp_session::tcp_session(boost::asio::io_context &context) : m_socket{context}, tcp_session_interface{} {}
 
