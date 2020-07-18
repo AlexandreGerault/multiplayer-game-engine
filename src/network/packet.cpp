@@ -1,6 +1,6 @@
 #include "network/packet.hpp"
 
-using namespace ww;
+using namespace mge;
 
 packet::packet(std::string const& payload) : m_size{static_cast<header_size_type>(payload.length())} {
     auto cursor = reinterpret_cast<char *>(&m_size);

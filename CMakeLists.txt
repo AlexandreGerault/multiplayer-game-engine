@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project(WerewolfServer VERSION 0.1.0)
+project(MGE VERSION 0.1.0)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
@@ -25,20 +25,23 @@ set(SERVER_SOURCE_FILES
     src/utils/observable.cpp
     src/network/data_received_event.cpp
     src/ui/command_observer.cpp
+    src/ui/command_registry.cpp
+    src/ui/command.cpp
+    src/ui/command_executor.cpp
     )
 
 add_library(server_lib ${SERVER_SOURCE_FILES})
 target_include_directories(server_lib
-	PUBLIC include
-	PUBLIC ${Boost_INCLUDE_DIRS}
-	)
+        PUBLIC include
+        PUBLIC ${Boost_INCLUDE_DIRS}
+        )
 target_link_libraries(server_lib
-		      PUBLIC ${Boost_LIBRARIES}
+                      PUBLIC ${Boost_LIBRARIES}
                       PRIVATE spdlog::spdlog)
 target_compile_definitions(server_lib
                            PUBLIC
                            BOOST_BIND_GLOBAL_PLACEHOLDERS
-                           $<$<PLATFORM_ID:Windows>:_WIN32_WINNT=0x0A00>)
+                           )
 
 add_executable(server main.cpp)
 target_link_libraries(server PRIVATE server_lib)

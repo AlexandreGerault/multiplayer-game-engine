@@ -1,12 +1,12 @@
-#ifndef WEREWOLFSERVER_PACKET_HPP
-#define WEREWOLFSERVER_PACKET_HPP
+#ifndef MGE_PACKET_HPP
+#define MGE_PACKET_HPP
 
 #include <array>
 #include <vector>
 #include <string>
 #include <cstring>
 
-namespace ww {
+namespace mge {
     using header_size_type = uint16_t;
     const int header_size = sizeof(header_size_type);
 
@@ -24,4 +24,4 @@ namespace ww {
 }
 
 
-#endif //WEREWOLFSERVER_PACKET_HPP
+#endif //MGE_PACKET_HPP

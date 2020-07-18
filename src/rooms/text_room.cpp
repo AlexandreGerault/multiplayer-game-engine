@@ -1,6 +1,6 @@
 #include <rooms/text_room.hpp>
 
-using namespace ww;
+using namespace mge;
 
 text_room::text_room(std::string const &name) : room_interface(name) {
 

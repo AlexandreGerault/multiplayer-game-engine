@@ -1,5 +1,5 @@
-#ifndef WEREWOLF_APPLICATION_HPP
-#define WEREWOLF_APPLICATION_HPP
+#ifndef MGE_APPLICATION_HPP
+#define MGE_APPLICATION_HPP
 
 #include <boost/asio/io_context.hpp>
 #include <memory>
@@ -13,8 +13,11 @@
 #include "rooms/server_rooms.hpp"
 #include "utils/factory.hpp"
 #include "ui/command_observer.hpp"
+#include "ui/command_registry.hpp"
 
-namespace ww {
+#include "ui/command_executors/ping_command_executor.hpp"
+
+namespace mge {
     class application {
     public:
         application();
@@ -27,7 +30,9 @@ namespace ww {
 
     private:
         void init_server_factory();
+        command_registry init_application_commands();
 
+        command_registry m_registry;
         std::shared_ptr<observer> m_command_observer;
         factory<
             tcp_listener_interface,
@@ -41,4 +46,4 @@ namespace ww {
     };
 }
 
-#endif //WEREWOLF_APPLICATION_HPP
+#endif //MGE_APPLICATION_HPP

@@ -1,5 +1,5 @@
-#ifndef WEREWOLF_ROOM_FACTORY_HPP
-#define WEREWOLF_ROOM_FACTORY_HPP
+#ifndef MGE_FACTORY_HPP
+#define MGE_FACTORY_HPP
 
 #include <functional>
 #include <memory>
@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <cassert>
 
-namespace ww {
+namespace mge {
     template<class Object, class... Args>
     class factory {
 
@@ -46,7 +46,7 @@ namespace ww {
     private:
         std::unordered_map<std::string, Creator> m_registry;
     };
-}// namespace ww
+}// namespace mge
 
 
-#endif//WEREWOLF_ROOM_FACTORY_HPP
+#endif//MGE_FACTORY_HPP

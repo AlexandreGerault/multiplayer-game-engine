@@ -1,6 +1,6 @@
 #include "network/tcp_session_interface.hpp"
 
-using namespace ww;
+using namespace mge;
 
 /**
  * @brief Display a success message.

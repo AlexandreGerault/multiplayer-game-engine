@@ -1,5 +1,5 @@
-#ifndef WEREWOLFSERVER_TCP_LISTENER_WEBSOCKET_HPP
-#define WEREWOLFSERVER_TCP_LISTENER_WEBSOCKET_HPP
+#ifndef MGE_TCP_LISTENER_WEBSOCKET_HPP
+#define MGE_TCP_LISTENER_WEBSOCKET_HPP
 
 #include <boost/asio.hpp>
 
@@ -7,7 +7,7 @@
 #include "tcp_session.hpp"
 #include "tcp_session_websocket.hpp"
 
-namespace ww {
+namespace mge {
     class tcp_listener_websocket : public tcp_listener_interface {
     public:
         tcp_listener_websocket() = delete;
@@ -25,4 +25,4 @@ namespace ww {
 }
 
 
-#endif //WEREWOLFSERVER_TCP_LISTENER_WEBSOCKET_HPP
+#endif //MGE_TCP_LISTENER_WEBSOCKET_HPP

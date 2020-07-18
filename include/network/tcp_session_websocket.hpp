@@ -1,5 +1,5 @@
-#ifndef WEREWOLFSERVER_TCP_SESSION_WEBSOCKET_HPP
-#define WEREWOLFSERVER_TCP_SESSION_WEBSOCKET_HPP
+#ifndef MGE_TCP_SESSION_WEBSOCKET_HPP
+#define MGE_TCP_SESSION_WEBSOCKET_HPP
 
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
@@ -7,7 +7,7 @@
 
 #include "network/tcp_session_interface.hpp"
 
-namespace ww {
+namespace mge {
     class tcp_session_websocket : public tcp_session_interface {
     public:
         tcp_session_websocket() = delete;
@@ -32,4 +32,4 @@ namespace ww {
     };
 }
 
-#endif //WEREWOLFSERVER_TCP_SESSION_WEBSOCKET_HPP
+#endif //MGE_TCP_SESSION_WEBSOCKET_HPP

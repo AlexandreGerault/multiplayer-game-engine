@@ -1,5 +1,5 @@
-#ifndef WEREWOLF_ROOM_INTERFACE_HPP
-#define WEREWOLF_ROOM_INTERFACE_HPP
+#ifndef MGE_ROOM_INTERFACE_HPP
+#define MGE_ROOM_INTERFACE_HPP
 
 #include <memory>
 #include <set>
@@ -7,7 +7,7 @@
 #include "core/configuration.hpp"
 #include "network/tcp_session.hpp"
 
-namespace ww {
+namespace mge {
     enum class room_state {
         lobby,
         in_progress
@@ -31,6 +31,6 @@ namespace ww {
         std::string m_name;
         std::set<std::shared_ptr<tcp_session>> m_clients;
     };
-}// namespace ww
+}// namespace mge
 
-#endif// WEREWOLF_ROOM_INTERFACE_HPP
+#endif// MGE_ROOM_INTERFACE_HPP

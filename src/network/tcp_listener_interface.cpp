@@ -1,6 +1,6 @@
 #include "network/tcp_listener_interface.hpp"
 
-using namespace ww;
+using namespace mge;
 
 tcp_listener_interface::tcp_listener_interface(boost::asio::io_context &context,
                                                boost::asio::ip::tcp::endpoint const &ep,

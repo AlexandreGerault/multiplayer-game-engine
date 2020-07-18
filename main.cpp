@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
 
     spdlog::debug("Werewolf server");
 
-    ww::application app;
+    mge::application app;
 
     return EXIT_SUCCESS;
 }

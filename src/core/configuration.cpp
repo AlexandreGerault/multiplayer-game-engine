@@ -1,6 +1,6 @@
 #include <core/configuration.hpp>
 
-using namespace ww;
+using namespace mge;
 
 configuration::configuration() : m_file("default.config") {
 }

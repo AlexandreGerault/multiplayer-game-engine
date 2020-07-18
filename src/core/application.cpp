@@ -1,9 +1,13 @@
 #include "core/application.hpp"
 #include <string>
 
-using namespace ww;
+using namespace mge;
 
-application::application() : m_config{"general.config"}, m_command_observer{std::make_shared<command_observer>()} {
+application::application() 
+    : m_config{"general.config"}
+    , m_registry {init_application_commands()}
+    , m_command_observer{std::make_shared<command_observer>(m_registry)}
+{
     spdlog::debug("Application created");
 
     int tcp_port{m_config.get<int>("tcp_port", 7777)};
@@ -43,4 +47,17 @@ void application::init_server_factory() {
                     -> std::unique_ptr<tcp_listener_interface> {
                 return std::make_unique<tcp_listener_websocket>(context, endpoint, obs);
             });
+}
+
+command_registry application::init_application_commands() {
+    command_registry _registry;
+    command ping{
+        "ping",
+        "test latency",
+        std::make_unique<ping_command_executor>()
+    };
+
+    _registry.registers(ping);
+
+    return _registry;
 }

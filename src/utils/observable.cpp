@@ -1,6 +1,6 @@
 #include "utils/observable.hpp"
 
-using namespace ww;
+using namespace mge;
 
 void observable::notify(std::shared_ptr<event_base> e) {
     for (auto &observer : m_observers) {
